@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>React 참고서 개요 - React</title>
+    <!-- import fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lexend&family=Saira:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <!-- import icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <style>
+      /*
+        # Global style
+      */
+      :root {
+        /*
+         * TYPOGRAPY
+         */
+        --font-saira: "Saira", sans-serif;
+        --font-lexend: "Lexend", sans-serif;
+
+        /* Content width */
+        --content-width: 896px;
+
+        /* 
+         * COLOR
+         */
+        --text-color: #f6f7f9;
+        --input-color: #99a1b3;
+        --link-color: #459eb4;
+        --version: #8a92a4;
+        --bg-color: #23272f;
+        --hover-color: #2e323b;
+        --surface-color: #283541;
+        --on-surface-color: #61cfe7;
+        --on-focus-color: #333a45;
+        --border: #343a46;
+
+        /* font weight */
+        --weight-regular: 400;
+        --weight-semiBold: 600;
+
+        /*
+         * BORDER RADIUS
+         */
+        --radius-4: 4px;
+        --radius-8: 8px;
+        --radius-12: 12px;
+        --radius-16: 16px;
+        --radius-28: 28px;
+        --radius-pill: 500px;
+        --radius-circle: 50%;
+
+        /**
+         * BOX SHADOW
+         */
+        --shadow-1: 0px 1px 3px hsla(0, 0%, 0%, 0.5);
+        --shadow-2: 0px 3px 6px hsla(0, 0%, 0%, 0.4);
+      }
+
+      * {
+        box-sizing: border-box;
+        padding: 0;
+        margin: 0;
+        color: var(--text-color);
+      }
+
+      body {
+        width: 100vw;
+        min-height: 100vh;
+        overflow-x: hidden;
+        display: flex;
+        flex-direction: column;
+        background-color: var(--bg-color);
+      }
+
+      input,
+      button {
+        border: 0;
+        outline: 0;
+      }
+
+      input[type="checkbox"],
+      input[type="radio"] {
+        display: none;
+      }
+
+      button {
+        cursor: pointer;
+      }
+
+      /*
+        # Header
+      */
+      header.top-bar {
+        width: 100%;
+        height: 64px;
+        padding: 6px 12px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+      }
+
+      .top-bar .left,
+      .top-bar .center,
+      .top-bar .right {
+        height: 100%;
+        display: flex;
+        align-items: center;
+      }
+
+      .top-bar .left, .top-bar .right {
+        flex: 1;
+      }
+
+      /* Appear on mobile mode */
+      .top-bar .hamburg-btn {
+        display: none;
+        padding: 6px;
+        width: 52px;
+        height: 100%;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.2rem;
+        border-radius: var(--radius-circle);
+        cursor: pointer;
+      }
+
+      .top-bar .hamburg-btn * {
+        cursor: pointer;
+      }
+
+      .top-bar .hamburg-btn:hover {
+        background-color: var(--hover-color);
+      }
+
+      .top-bar .logo-box {
+        display: flex;
+        align-items: center;
+        height: 100%;
+        padding: 6px;
+        overflow: hidden;
+        cursor: pointer;
+      }
+
+      .top-bar .logo-box h3 {
+        padding: 6px;
+        font-size: 1rem;
+        font-weight: var(--weight-regular);
+      }
+
+      .top-bar .logo-box img {
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .top-bar .version {
+        height: 100%;
+        font-size: 0.7rem;
+        color: #8a92a4;
+        display: flex;
+        align-items: center;
+      }
+
+      .top-bar .center {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        max-width: var(--content-width);
+        width: 100%;
+        height: calc(100% - 10px);
+      }
+
+      .top-bar .center .search-bar {
+        width: 100%;
+        height: 100%;
+        background-color: var(--on-focus-color);
+        border-radius: var(--radius-28);
+        display: grid;
+        grid-template-columns: 44px 1fr 90px;
+        outline-offset: 2px;
+      }
+
+      .search-bar:hover {
+        outline: 2px solid var(--link-color);
+      }
+
+      .search-bar * {
+        color: var(--input-color);
+        font-size: 1rem;
+        outline-offset: 2px;
+      }
+
+      .search-bar .icon-box,
+      .search-bar .input-trigger,
+      .search-bar .short-cut {
+        width: 100%;
+        height: auto;
+        display: flex;
+        align-items: center;
+      }
+
+      .search-bar .icon-box,
+      .search-bar .short-cut {
+        justify-content: center;
+      }
+
+      .search-bar .input-trigger p {
+        font-size: 1rem;
+      }
+
+      .search-bar .short-cut {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+      }
+
+      .search-bar .short-cut .key-bind {
+        border-radius: var(--radius-4);
+        font-size: 0.8rem;
+        font-family: Consolas, Lucida Console, monospace;
+        background-color: var(--bg-color);
+        padding: 3px 6px;
+      }
+
+      .top-bar .right {
+        justify-content: flex-end;
+        flex-shrink: 0;
+      }
+
+      .top-bar .category-wrapper {
+        display: flex;
+        align-items: center;
+        flex-shrink: 0;
+      }
+
+      .right .search-icon {
+        display: none;
+      }
+
+      .right .link-list {
+        list-style: none;
+        display: flex;
+        gap: 6px;
+      }
+
+      .right .link-list label {
+        padding: 10px 12px;
+        border-radius: var(--radius-28);
+        cursor: pointer;
+        text-wrap: nowrap;
+      }
+
+      .right .link-list label:hover {
+        background-color: var(--hover-color);
+      }
+
+      input[name="category"]:checked + label {
+        color: var(--on-surface-color);
+        background-color: var(--surface-color);
+        font-weight: var(--weight-regular);
+      }
+
+      .right .sub-list {
+        display: flex;
+        align-items: center;
+        list-style: none;
+        padding: 0 10px;
+      }
+
+      .sub-list li button {
+        width: 50px;
+        height: 50px;
+        border-radius: var(--radius-circle);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.6rem;
+        font-family: var(--font-saira);
+        font-weight: var(--weight-semiBold);
+        background: transparent;
+      }
+
+      .sub-list li a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .sub-list li button:hover {
+        background-color: var(--hover-color);
+      }
+
+      /*
+        # For depend on contents overflow
+      */
+      @media screen and (min-width: 1024px) and (max-width: 1919px) {
+        .top-bar .logo-box h3 { display: none; }
+
+        .top-bar .left { flex: 0; }
+      }
+
+      /*
+        # Tablet
+      */
+      @media screen and (min-width: 768px) and (max-width: 1023px) {
+        header.top-bar { padding: 6px; }
+
+        .top-bar .logo-box h3 { display: none; }
+
+        .top-bar .left .hamburg-btn { display: flex; }
+
+        .top-bar .right nav:nth-child(1) { display: none; }
+      }
+
+      /*
+        # Mobile
+      */
+      @media screen and (max-width: 767px) {
+        header.top-bar { padding: 6px }
+
+        .top-bar .logo-box h3 { display: none; }
+
+        .top-bar .left .hamburg-btn { display: flex; }
+
+        .top-bar .right nav:nth-child(1) { display: none; }
+
+        .top-bar .center { display: none; }
+
+        .sub-list .search-icon { display: flex; }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="top-bar">
+      <div class="left">
+        <div class="hamburg-btn" id="show-on-mobile">
+          <input type="checkbox" id="pop-up" />
+          <label for="pop-up">
+            <i class="fa-solid fa-bars"></i>
+          </label>
+        </div>
+        <div class="logo-box">
+          <!-- link has to be inserted here -->
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/2300px-React-icon.svg.png"
+            alt=""
+          />
+          <h3>React</h3>
+        </div>
+        <span class="version"> v19.1 </span>
+      </div>
+      <div class="center">
+        <button class="search-bar">
+          <div class="icon-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </div>
+          <div class="input-trigger">
+            <p>검색</p>
+          </div>
+          <div class="short-cut">
+            <p class="key-bind">Ctrl</p>
+            <p class="key-bind">K</p>
+          </div>
+        </button>
+      </div>
+      <div class="right">
+        <div class="category-wrapper">
+          <nav>
+            <ul class="link-list">
+              <li>
+                <input type="radio" name="category" id="start" />
+                <label for="start">학습하기</label>
+              </li>
+              <li>
+                <input type="radio" name="category" id="api-docs" />
+                <label for="api-docs">API 참고서</label>
+              </li>
+              <li>
+                <input type="radio" name="category" id="community" />
+                <label for="community">커뮤니티</label>
+              </li>
+              <li>
+                <input type="radio" name="category" id="blog" />
+                <label for="blog">블로그</label>
+              </li>
+            </ul>
+          </nav>
+          <nav>
+            <ul class="sub-list">
+              <!-- Hide on over mobile size -->
+              <li class="search-icon">
+                <button><i class="fa-solid fa-magnifying-glass"></i></button>
+              </li>
+              <li>
+                <button>18</button>
+              </li>
+              <li>
+                <button><i class="fa-solid fa-moon"></button></i>
+              </li>
+              <li>
+                <button><i class="fa-solid fa-font"></button></i>
+              </li>
+              <li>
+                <a href="https://github.com/facebook/react/releases" target="_blank">
+                  <button><i class="fa-brands fa-github"></button></i>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </header>
+  </body>
+</html>

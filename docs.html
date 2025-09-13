@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lexend&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
+    <title>Document</title>
+    <style>
+      * {
+        font-family: "Lexend", sans-serif;
+        box-sizing: border-box;
+        padding: 0;
+        margin: 0;
+        user-select: none;
+      }
+
+      :root {
+        --white-color: #fff;
+        --bg-color: #e7eaf0;
+        --primary: #4680ff;
+        --text-color: #252529;
+        --desc-color: #7f7d8b;
+      }
+
+      body {
+        width: 100vw;
+        background: transparent;
+        overflow-x: hidden;
+      }
+
+      section.content {
+        width: 1080px;
+        display: flex;
+        flex-direction: column;
+      }
+
+      header.menu-bar {
+        position: relative;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+      }
+
+      .menu-bar .content {
+        position: fixed;
+        background-color: #00000030;
+        border-radius: 50px;
+        backdrop-filter: blur(8px);
+        border: 2px solid var(--white-color);
+        top: 40px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 3;
+        color: #fff;
+        padding: 20px;
+        transition: all 0.3s ease-in-out;
+        box-shadow: 0 0 4px 2px #00000030;
+      }
+
+      .menu-bar .content .logo {
+        width: 40px;
+        height: 40px;
+        cursor: pointer;
+        transition: width 0.3s ease-in-out, height 0.3s ease-in-out;
+      }
+
+      .menu-bar .content:hover {
+        background-color: #ffffff80;
+        font-weight: 600;
+        color: #000;
+      }
+
+      .menu-bar .content:hover .logo {
+        width: 50px;
+        height: 50px;
+      }
+
+      .menu-bar .content .logo img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transform: rotate(9deg);
+        transition: transform 0.3s ease-in-out;
+      }
+
+      .menu-bar .content:hover .logo img {
+        transform: rotate(0);
+      }
+
+      .menu-bar .content .category {
+        position: relative;
+        display: flex;
+        align-items: center;
+      }
+
+      .category .list {
+        display: flex;
+        list-style: none;
+        gap: 16px;
+      }
+
+      .category .list p {
+        text-align: center;
+        width: 100px;
+        padding: 10px;
+        cursor: pointer;
+      }
+
+      header.top-bar {
+        position: relative;
+        width: 100%;
+        height: 480px;
+        display: flex;
+        justify-content: center;
+      }
+
+      .top-bar .banner {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0;
+        overflow: hidden;
+        z-index: 1;
+        filter: brightness(0.8);
+      }
+
+      .top-bar .banner img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .top-bar .content {
+        position: relative;
+        height: 100%;
+        display: flex;
+        justify-content: flex-end;
+        z-index: 2;
+      }
+
+      .top-bar .content * {
+        color: #fff;
+      }
+
+      .top-bar .content .made-by {
+        position: absolute;
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        bottom: 40px;
+        right: 0;
+      }
+
+      .made-by img {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+      }
+
+      .top-bar .title h1 {
+        padding: 40px 0;
+        font-size: 4rem;
+      }
+
+      input[type="radio"] {
+        display: none;
+      }
+
+      .category .is-clicked {
+        position: absolute;
+        display: flex;
+        gap: 4px;
+        left: 38px;
+        bottom: 0;
+        transition: all 0.3s;
+      }
+
+      .category .is-clicked .dot {
+        width: 6px;
+        height: 6px;
+        background-color: var(--primary);
+        border-radius: 50%;
+      }
+
+      .category #about:checked ~ .is-clicked {
+        left: calc(38px + 116px);
+      }
+
+      .category #work:checked ~ .is-clicked {
+        left: calc(38px + 116px * 2);
+      }
+
+      .category #meteocons:checked ~ .is-clicked {
+        left: calc(38px + 116px * 3);
+      }
+
+      .category #contact:checked ~ .is-clicked {
+        left: calc(38px + 116px * 4);
+      }
+
+      main.container {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+      }
+
+      .container .main-body.content {
+        width: 1080px;
+        display: grid;
+        grid-template-columns: 360px 1fr;
+        padding: 20px 0;
+        color: var(--text-color);
+        font-size: 1.1rem;
+        line-height: 1.6;
+      }
+
+      .main-body aside,
+      .main-body article {
+        margin-top: 120px;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        gap: 20px;
+      }
+
+      .main-body aside {
+        padding-right: 20px;
+      }
+
+      .main-body article {
+        padding-left: 20px;
+      }
+
+      .main-body aside .weather-box {
+        position: relative;
+        width: 100%;
+        background-color: var(--white-color);
+        border-radius: 20px;
+        box-shadow: 1px 1px 8px 2px #00000020;
+      }
+
+      .main-body aside .disc {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        width: 100%;
+      }
+
+      .weather-box h2 {
+        position: absolute;
+        font-size: 3rem;
+        right: 20px;
+        bottom: 20px;
+      }
+
+      .disc h3 {
+        font-size: 1.8rem;
+      }
+
+      .disc h3 span {
+        color: var(--primary);
+      }
+
+      .disc .sub-disc {
+        color: var(--desc-color);
+      }
+
+      .main-body .list-of {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        padding-left: 40px;
+        color: var(--desc-color);
+      }
+
+      .main-body .list-of li::marker {
+        font-size: 1.8rem;
+        color: var(--primary);
+      }
+
+      footer {
+        margin-top: 120px;
+        width: 100%;
+        height: 360px;
+        background-color: var(--bg-color);
+        padding: 40px 0;
+        color: var(--text-color);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      footer .bottom-logo {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        font-size: 1.6rem;
+      }
+
+      footer .bottom-logo > div {
+        width: 80px;
+        height: 80px;
+      }
+
+      .side-bar {
+        position: fixed;
+        width: 80px;
+        padding: 10px;
+        border-radius: 50px;
+        right: 60px;
+        bottom: 60px;
+        background-color: var(--white-color);
+        box-shadow: 2px 2px 4px 2px #00000030;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .side-bar .side-button {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--desc-color);
+        color: var(--white-color);
+        box-shadow: 2px 2px 4px 2px #00000030;
+        cursor: pointer;
+        font-size: 1.6rem;
+        font-weight: 600;
+      }
+
+      .side-bar .side-button:nth-last-child(1) {
+        background-color: var(--primary);
+        margin-top: 60px;
+      }
+
+      .weather-section {
+        width: 1080px;
+        margin-top: 120px;
+      }
+
+      .weather-section .svg-binder {
+        display: flex;
+        justify-content: center;
+        gap: 16px;
+        flex-wrap: wrap;
+      }
+
+      .weather-section .svg-binder .svg-box {
+        width: 140px;
+        height: 140px;
+        border: 1px solid var(--bg-color);
+        border-radius: 16px;
+        padding: 20px;
+      }
+    </style>
+  </head>
+  <body style="position: relative">
+    <div class="side-bar">
+      <div class="side-button go-top">
+        <i class="fa-solid fa-phone"></i>
+      </div>
+      <div class="side-button go-top">
+        <i class="fa-solid fa-envelope"></i>
+      </div>
+      <div class="side-button go-top">
+        <i class="fa-solid fa-circle-info"></i>
+      </div>
+      <div class="side-button go-top">
+        <i class="fa-solid fa-chevron-up"></i>
+      </div>
+    </div>
+    <header class="menu-bar">
+      <section class="content">
+        <div class="logo">
+          <img src="https://bas.dev/_next/static/media/logo.42a351fd.svg" />
+        </div>
+        <div class="category">
+          <ul class="list">
+            <li>
+              <label for="home"><p>Home</p></label>
+            </li>
+            <li>
+              <label for="about"><p>About</p></label>
+            </li>
+            <li>
+              <label for="work"><p>Work</p></label>
+            </li>
+            <li>
+              <label for="meteocons"><p>Meteocons</p></label>
+            </li>
+            <li>
+              <label for="contact"><p>Contact</p></label>
+            </li>
+          </ul>
+          <input type="radio" id="home" name="trigger" checked />
+          <input type="radio" id="about" name="trigger" />
+          <input type="radio" id="work" name="trigger" />
+          <input type="radio" id="meteocons" name="trigger" />
+          <input type="radio" id="contact" name="trigger" />
+          <div class="is-clicked">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+          </div>
+        </div>
+      </section>
+    </header>
+    <header class="top-bar">
+      <div class="banner">
+        <img
+          src="https://i.pinimg.com/1200x/5e/5f/5a/5e5f5a6166779e10cb59b0b142343484.jpg"
+        />
+      </div>
+      <section class="content">
+        <div class="title">
+          <h1><i class="fa-solid fa-kiwi-bird"></i> Meteocons</h1>
+        </div>
+        <div class="made-by">
+          <img src="https://avatars.githubusercontent.com/u/978257?s=64&v=4"/>
+          <h3>Mady by Basmilius</h3>
+        </div>
+      </section>
+    </header>
+    <main class="container">
+      <div class="main-body content">
+        <aside>
+          <div class="weather-box">
+            <h2>28°C</h2>
+            <img
+              src="https://bmcdn.nl/assets/weather-icons/v3.0/fill/svg/clear-day.svg"
+            />
+          </div>
+          <div class="disc">
+            <h3>Animated Weather Icons<span>.</span></h3>
+            <p class="sub-disc">
+              A set of 236 animated icons in diffrent styles. Free to use in any
+              kind of project.
+            </p>
+          </div>
+        </aside>
+        <article>
+          <strong>
+            These hand-crafted icons are designed in Adobe Illustrator and
+            animated to SVG files using code and Lottie files using Adobe After
+            Effects. They'll look amazing in your own project.
+          </strong>
+          <p>
+            The icons are available under a MIT-license, which means that
+            they're free to use and you may edit them as you wish. The only
+            requirement is that you should preserve any copyright notices in the
+            source files.
+          </p>
+          <ul class="list-of">
+            <li>
+              <p>
+                High performant Lottie animations are available for every style.
+                These animations were created using the LottieFiles plugin for
+                Adobe After Effects.
+              </p>
+            </li>
+            <li>
+              <p>
+                Every style includes both animated and static SVG files. The
+                animated SVG files cannot be used on mobile and desktop apps as
+                far as I know. Use the Lottie animations for that.
+              </p>
+            </li>
+            <li>
+              <p>
+                Monochrome style has various font formats available to use on
+                desktop and on the web. These fonts are not animated.
+              </p>
+            </li>
+            <li>
+              <p>
+                Static PNG files in various sizes are available. These files are
+                pre-optimized with every publish and are updated with every
+                release.
+              </p>
+            </li>
+            <li>
+              <p>
+                The icons can be used in video projects. Various transparent
+                video files are available to use and the After Effects source
+                file is also available.
+              </p>
+            </li>
+          </ul>
+        </article>
+      </div>
+      <section class="weather-section">
+        <h3 style="margin: 20px 0;">Weather</h3>
+        <div class="svg-binder">
+          <div class="svg-box">
+            <img src="https://bmcdn.nl/assets/weather-icons/v3.0/fill/svg/clear-day.svg" />
+          </div>
+          <div class="svg-box">
+            <img src="https://bmcdn.nl/assets/weather-icons/v3.0/fill/svg/clear-night.svg" />
+          </div>
+          <div class="svg-box">
+            <img src="https://bmcdn.nl/assets/weather-icons/v3.0/fill/svg/cloudy.svg" />
+          </div>
+          <div class="svg-box">
+            <img src="https://bmcdn.nl/assets/weather-icons/v3.0/fill/svg/drizzle.svg" />
+          </div>
+          <div class="svg-box">
+            <img src="https://bmcdn.nl/assets/weather-icons/v3.0/fill/svg/fog.svg" />
+          </div>
+          <div class="svg-box">
+            <img src="https://bmcdn.nl/assets/weather-icons/v3.0/fill/svg/hail.svg" />
+          </div>
+          <div class="svg-box">
+            <img src="https://bmcdn.nl/assets/weather-icons/v3.0/fill/svg/haze.svg" />
+          </div>
+
+          <!-- Second line -->
+
+          <div class="svg-box">
+            <img src="https://bmcdn.nl/assets/weather-icons/v3.0/fill/svg/clear-day.svg" />
+          </div>
+          <div class="svg-box">
+            <img src="https://bmcdn.nl/assets/weather-icons/v3.0/fill/svg/clear-night.svg" />
+          </div>
+          <div class="svg-box">
+            <img src="https://bmcdn.nl/assets/weather-icons/v3.0/fill/svg/cloudy.svg" />
+          </div>
+          <div class="svg-box">
+            <img src="https://bmcdn.nl/assets/weather-icons/v3.0/fill/svg/drizzle.svg" />
+          </div>
+          <div class="svg-box">
+            <img src="https://bmcdn.nl/assets/weather-icons/v3.0/fill/svg/fog.svg" />
+          </div>
+          <div class="svg-box">
+            <img src="https://bmcdn.nl/assets/weather-icons/v3.0/fill/svg/hail.svg" />
+          </div>
+          <div class="svg-box">
+            <img src="https://bmcdn.nl/assets/weather-icons/v3.0/fill/svg/haze.svg" />
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <div class="bottom-logo">
+        <div>
+          <img src="https://bas.dev/_next/static/media/logo.42a351fd.svg" />
+        </div>
+        <h1>Meteocons</h1>
+      </div>
+      <p>Copyright © 2008–2024 • KvK: 78355621 • BTW: NL003322759B51</p>
+    </footer>
+  </body>
+</html>
