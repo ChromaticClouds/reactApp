@@ -37,11 +37,11 @@
          * COLOR
          */
         --text-color: #f6f7f9;
-        --input-color: #99a1b3;
+        --dark-text-color: #979fb0;
         --link-color: #459eb4;
-        --version: #8a92a4;
         --bg-color: #23272f;
         --hover-color: #2e323b;
+        --light-hover-color: #283541;
         --surface-color: #283541;
         --on-surface-color: #61cfe7;
         --on-focus-color: #333a45;
@@ -78,11 +78,15 @@
 
       body {
         width: 100vw;
-        min-height: 100vh;
-        overflow-x: hidden;
         display: flex;
         flex-direction: column;
         background-color: var(--bg-color);
+        overflow-x: hidden;
+      }
+
+      a {
+        text-decoration: none;
+        color: inherit;
       }
 
       input,
@@ -100,17 +104,29 @@
         cursor: pointer;
       }
 
+      ::-webkit-scrollbar {
+        width: 10px;
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background-color: var(--on-focus-color);
+        border-radius: var(--radius-12);
+      }
       /*
         # Header
       */
       header.top-bar {
+        position: sticky;
+        top: 0;
         width: 100%;
         height: 64px;
-        padding: 6px 12px;
+        padding: 6px 20px;
         display: flex;
         align-items: center;
         justify-content: space-between;
+        background-color: var(--bg-color);
         gap: 12px;
+        z-index: 2;
       }
 
       .top-bar .left,
@@ -121,9 +137,12 @@
         align-items: center;
       }
 
-      .top-bar .left, .top-bar .right {
+      .top-bar .left,
+      .top-bar .right {
         flex: 1;
       }
+
+      /* Pad left header because of scrollbar space size */
 
       /* Appear on mobile mode */
       .top-bar .hamburg-btn {
@@ -169,7 +188,7 @@
       .top-bar .version {
         height: 100%;
         font-size: 0.7rem;
-        color: #8a92a4;
+        color: var(--dark-text-color);
         display: flex;
         align-items: center;
       }
@@ -178,8 +197,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        max-width: var(--content-width);
-        width: 100%;
+        width: var(--content-width);
         height: calc(100% - 10px);
       }
 
@@ -198,7 +216,7 @@
       }
 
       .search-bar * {
-        color: var(--input-color);
+        color: var(--dark-text-color);
         font-size: 1rem;
         outline-offset: 2px;
       }
@@ -303,43 +321,342 @@
         background-color: var(--hover-color);
       }
 
+      main {
+        display: grid;
+        grid-template-columns: 340px 1fr 320px;
+      }
+
+      main section {
+        display: flex;
+        justify-content: center;
+        margin: 0 10px;
+      }
+
+      main .content {
+        margin-right: 20px;
+        max-width: var(--content-width);
+        width: 100%;
+        height: 100%;
+        padding: 10px 10px;
+        margin-bottom: 800px;
+      }
+
+      main .panel-wrapper {
+        position: relative;
+        width: 100%;
+      }
+
+      main .left-panel,
+      main .right-panel {
+        position: fixed;
+        top: 64px;
+        width: 320px;
+        height: calc(100vh - 64px);
+        overflow-y: auto;
+        padding-bottom: 120px;
+      }
+
+      main .right-panel {
+        right: 0;
+      }
+
+      .left-panel nav {
+        margin-top: 10px;
+        margin-right: 20px;
+      }
+
+      .left-panel nav ul {
+        list-style: none;
+      }
+
+      .left-panel .header-title {
+        display: flex;
+        align-items: center;
+        padding: 10px 20px;
+      }
+
+      .left-panel .header-title h3 {
+        font-weight: var(--weight-regular);
+        font-size: 0.8rem;
+        color: var(--dark-text-color);
+      }
+
+      .left-panel .round-button {
+        height: 50px;
+        border-top-right-radius: var(--radius-16);
+        border-bottom-right-radius: var(--radius-16);
+        display: grid;
+        grid-template-columns: 1fr 50px;
+        place-content: center;
+      }
+
+      .left-panel .round-button:hover {
+        background-color: var(--light-hover-color);
+      }
+
+      .left-panel .round-button span {
+        height: 100%;
+        padding: 20px;
+      }
+
+      .left-panel .round-button .icon-box {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .left-panel .round-button .icon-box i {
+        font-size: 0.8rem;
+        color: var(--dark-text-color);
+      }
+
+      .left-panel .division {
+        margin: 10px 0;
+        margin-left: 20px;
+      }
+
+      .left-panel .division > div {
+        width: 100%;
+        height: 1px;
+        background-color: var(--border);
+      }
+
+      main .content article {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      main .content h1 {
+        font-size: 2.4rem;
+      }
+
+      main .content h2 {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        padding: 30px 0;
+        font-size: 1.8rem;
+        scroll-margin-top: 40px;
+      }
+
+      main .content h2:hover i {
+        display: inline-block;
+      }
+
+      main .content h2 i {
+        display: none;
+        font-size: 1.2rem;
+        color: var(--border);
+        cursor: pointer;
+      }
+
+      main .content p {
+        font-size: 1.1rem;
+      }
+
+      main .content p.xl {
+        font-size: 1.3rem;
+      }
+
+      main .content ul {
+        margin-left: 30px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      main .content span {
+        color: var(--link-color);
+        cursor: pointer;
+      }
+
+      main .content span:hover {
+        text-decoration: underline;
+      }
+
+      main .right-panel {
+        padding: 10px 0;
+        padding-left: 10px;
+      }
+
+      main .right-panel .right-corner {
+        width: 100%;
+        margin-top: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        font-size: 0.9rem;
+      }
+
+      .right-corner .button-list {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 6px;
+        list-style: none;
+      }
+
+      .right-corner .button-list * {
+        width: 100%;
+      }
+
+      .right-corner .button-list span:hover {
+        color: var(--on-surface-color);
+      }
+
+      .right-corner .button-list span {
+        display: flex;
+        padding-left: 10px;
+        height: 40px;
+        text-align: left;
+        font-size: 0.9rem;
+        align-items: center;
+        border-top-left-radius: var(--radius-12);
+        border-bottom-left-radius: var(--radius-12);
+        cursor: pointer;
+      }
+
+      #btn-1:checked + label span {
+        color: var(--on-surface-color);
+        background-color: var(--light-hover-color);
+      }
+
+      #btn-2:checked + label span {
+        color: var(--on-surface-color);
+        background-color: var(--light-hover-color);
+      }
+
+      #btn-3:checked + label span {
+        color: var(--on-surface-color);
+        background-color: var(--light-hover-color);
+      }
+
+      #btn-4:checked + label span {
+        color: var(--on-surface-color);
+        background-color: var(--light-hover-color);
+      }
+
+      #btn-5:checked + label span {
+        color: var(--on-surface-color);
+        background-color: var(--light-hover-color);
+      }
+
       /*
         # For depend on contents overflow
       */
-      @media screen and (min-width: 1024px) and (max-width: 1919px) {
-        .top-bar .logo-box h3 { display: none; }
+      @media screen and (max-width: 1535px) {
+        main {
+          grid-template-columns: 340px 1fr;
+        }
 
-        .top-bar .left { flex: 0; }
+        main .panel-wrapper.right {
+          display: none;
+        }
+      }
+
+      @media screen and (min-width: 1024px) and (max-width: 1919px) {
+        .top-bar .logo-box h3 {
+          display: none;
+        }
+
+        .top-bar .left {
+          flex: 0;
+        }
+
+        .top-bar .center {
+          width: 0;
+          flex: 2;
+        }
       }
 
       /*
         # Tablet
       */
       @media screen and (min-width: 768px) and (max-width: 1023px) {
-        header.top-bar { padding: 6px; }
+        header.top-bar {
+          padding: 6px;
+        }
 
-        .top-bar .logo-box h3 { display: none; }
+        .top-bar .logo-box h3 {
+          display: none;
+        }
 
-        .top-bar .left .hamburg-btn { display: flex; }
+        .top-bar .left {
+          flex: 0;
+        }
 
-        .top-bar .right nav:nth-child(1) { display: none; }
+        .top-bar .left .hamburg-btn {
+          display: flex;
+        }
+
+        .top-bar .right nav:nth-child(1) {
+          display: none;
+        }
+
+        main .panel-wrapper.left {
+          display: none;
+        }
+
+        main {
+          grid-template-columns: 1fr;
+        }
+
+        main .content {
+          margin-right: 0;
+          padding: 0 60px;
+        }
       }
 
       /*
         # Mobile
       */
       @media screen and (max-width: 767px) {
-        header.top-bar { padding: 6px }
+        header.top-bar {
+          padding: 6px;
+        }
 
-        .top-bar .logo-box h3 { display: none; }
+        .top-bar .left {
+          flex: 0;
+        }
 
-        .top-bar .left .hamburg-btn { display: flex; }
+        .top-bar .logo-box h3 {
+          display: none;
+        }
 
-        .top-bar .right nav:nth-child(1) { display: none; }
+        .top-bar .left .hamburg-btn {
+          display: flex;
+        }
 
-        .top-bar .center { display: none; }
+        .top-bar .right nav:nth-child(1) {
+          display: none;
+        }
 
-        .sub-list .search-icon { display: flex; }
+        .top-bar .center {
+          display: none;
+        }
+
+        .sub-list .search-icon {
+          display: flex;
+        }
+
+        main .panel-wrapper.left {
+          display: none;
+        }
+
+        main section {
+          width: 100vw;
+        }
+
+        main .content {
+          display: flex;
+          flex-direction: column;
+          width: 100%;
+          padding: 0 10px;
+        }
       }
     </style>
   </head>
@@ -360,7 +677,7 @@
           />
           <h3>React</h3>
         </div>
-        <span class="version"> v19.1 </span>
+        <span class="version">v19.1</span>
       </div>
       <div class="center">
         <button class="search-bar">
@@ -408,14 +725,17 @@
                 <button>18</button>
               </li>
               <li>
-                <button><i class="fa-solid fa-moon"></button></i>
+                <button><i class="fa-solid fa-moon"></i></button>
               </li>
               <li>
-                <button><i class="fa-solid fa-font"></button></i>
+                <button><i class="fa-solid fa-font"></i></button>
               </li>
               <li>
-                <a href="https://github.com/facebook/react/releases" target="_blank">
-                  <button><i class="fa-brands fa-github"></button></i>
+                <a
+                  href="https://github.com/facebook/react/releases"
+                  target="_blank"
+                >
+                  <button><i class="fa-brands fa-github"></i></button>
                 </a>
               </li>
             </ul>
@@ -423,5 +743,384 @@
         </div>
       </div>
     </header>
+    <main>
+      <div class="panel-wrapper left">
+        <!-- Left panel-->
+        <aside class="left-panel">
+          <nav>
+            <ul class="left-category">
+              <li class="header-title">
+                <h3>react@19.1</h3>
+              </li>
+              <li>
+                <a href="#">
+                  <div class="round-button">
+                    <span>개요</span>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <div class="round-button">
+                    <span>Hook</span>
+                    <div class="icon-box">
+                      <i class="fa-solid fa-chevron-right"></i>
+                    </div>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <div class="round-button">
+                    <span>컴포넌트</span>
+                    <div class="icon-box">
+                      <i class="fa-solid fa-chevron-right"></i>
+                    </div>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <div class="round-button">
+                    <span>API</span>
+                    <div class="icon-box">
+                      <i class="fa-solid fa-chevron-right"></i>
+                    </div>
+                  </div>
+                </a>
+              </li>
+              <li class="division">
+                <div></div>
+              </li>
+              <li class="header-title">
+                <h3>react-dom@19.1</h3>
+              </li>
+              <li>
+                <a href="#">
+                  <div class="round-button">
+                    <span>Hook</span>
+                    <div class="icon-box">
+                      <i class="fa-solid fa-chevron-right"></i>
+                    </div>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <div class="round-button">
+                    <span>컴포넌트</span>
+                    <div class="icon-box">
+                      <i class="fa-solid fa-chevron-right"></i>
+                    </div>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <div class="round-button">
+                    <span>API</span>
+                    <div class="icon-box">
+                      <i class="fa-solid fa-chevron-right"></i>
+                    </div>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <div class="round-button">
+                    <span>클라이언트 API</span>
+                    <div class="icon-box">
+                      <i class="fa-solid fa-chevron-right"></i>
+                    </div>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <div class="round-button">
+                    <span>서버 API</span>
+                    <div class="icon-box">
+                      <i class="fa-solid fa-chevron-right"></i>
+                    </div>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <div class="round-button">
+                    <span>정적 API</span>
+                    <div class="icon-box">
+                      <i class="fa-solid fa-chevron-right"></i>
+                    </div>
+                  </div>
+                </a>
+              </li>
+              <li class="division">
+                <div></div>
+              </li>
+              <li class="header-title">
+                <h3>React의 규칙</h3>
+              </li>
+              <li>
+                <a href="#">
+                  <div class="round-button">
+                    <span>개요</span>
+                    <div class="icon-box">
+                      <i class="fa-solid fa-chevron-right"></i>
+                    </div>
+                  </div>
+                </a>
+              </li>
+              <li class="division">
+                <div></div>
+              </li>
+              <li class="header-title">
+                <h3>React 서버 컴포넌트</h3>
+              </li>
+              <li>
+                <a href="#">
+                  <div class="round-button">
+                    <span>서버 컴포넌트</span>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <div class="round-button">
+                    <span>서버 함수</span>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <div class="round-button">
+                    <span>개요</span>
+                    <div class="icon-box">
+                      <i class="fa-solid fa-chevron-right"></i>
+                    </div>
+                  </div>
+                </a>
+              </li>
+              <li class="division">
+                <div></div>
+              </li>
+              <li class="header-title">
+                <h3>레거시 API</h3>
+              </li>
+              <li>
+                <a href="#">
+                  <div class="round-button">
+                    <span>레거시 React API</span>
+                    <div class="icon-box">
+                      <i class="fa-solid fa-chevron-right"></i>
+                    </div>
+                  </div>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </aside>
+      </div>
+      <!-- Center panel -->
+      <section>
+        <div class="content">
+          <article id="react">
+            <h1>React 참고서 개요</h1>
+            <p class="xl">
+              이 섹션은 React와 관련된 작업에 대한 상세한 참고서를 제공합니다.
+              React에 대한 소개는 <span>학습하기</span> 섹션을 참고하세요.
+            </p>
+            <p>
+              React 참고서는 다음과 같은 기능적인 하위 섹션으로 구성되어
+              있습니다.
+            </p>
+          </article>
+          <h2 id="react">
+            React
+            <a title="Link for React" href="#">
+              <i class="fa-solid fa-paperclip"></i>
+            </a>
+          </h2>
+          <article>
+            <p>React의 프로그래밍 기능.</p>
+            <ul>
+              <li>
+                <p>
+                  <span>Hook</span> - 컴포넌트에서 다양한 React 기능을
+                  사용하세요.
+                </p>
+              </li>
+              <li>
+                <p>
+                  <span>컴포넌트</span> - JSX에서 사용할 수 있는 내장
+                  컴포넌트입니다.
+                </p>
+              </li>
+              <li>
+                <p>
+                  <span>API</span> - 컴포넌트 정의에 유용한 API들을 다룹니다.
+                </p>
+              </li>
+              <li>
+                <p>
+                  <span>지시어</span> - React 서버 컴포넌트와 호환되는
+                  번들러에게 지시를 제공합니다.
+                </p>
+              </li>
+            </ul>
+          </article>
+          <h2 id="react-dom">
+            React DOM
+            <a title="Link for React DOM" href="#">
+              <i class="fa-solid fa-paperclip"></i>
+            </a>
+          </h2>
+          <article>
+            <p>
+              React DOM은 브라우저 DOM 환경에서 실행되는 웹 애플리케이션에서만
+              지원되는 기능을 포함하고 있습니다. 이 섹션은 다음과 같이 나뉩니다.
+            </p>
+            <ul>
+              <li>
+                <p>
+                  <span>Hook</span> - 브라우저 DOM 환경에서 실행되는 웹
+                  애플리케이션을 위한 Hook입니다.
+                </p>
+              </li>
+              <li>
+                <p>
+                  <span>컴포넌트</span> - React는 브라우저 내장 HTML 및 SVG
+                  컴포넌트를 모두 지원합니다.
+                </p>
+              </li>
+              <li>
+                <p>
+                  <span>API</span> - <code>react-dom</code> 패키지에는 웹
+                  애플리케이션에서만 지원되는 메서드가 포함되어 있습니다.
+                </p>
+              </li>
+              <li>
+                <p>
+                  <span>클라이언트 API</span> -
+                  <code>react-dom/client</code> API를 사용하면 브라우저에서
+                  React 컴포넌트를 렌더링할 수 있습니다.
+                </p>
+              </li>
+              <li>
+                <p>
+                  <span>서버 API</span> - <code>react-dom/server</code> API를
+                  사용하면 서버에서 React 컴포넌트를 HTML로 렌더링할 수
+                  있습니다.
+                </p>
+              </li>
+            </ul>
+          </article>
+          <h2 id="react-rule">
+            React의 규칙
+            <a title="Link for React의 규칙" href="#">
+              <i class="fa-solid fa-paperclip"></i>
+            </a>
+          </h2>
+          <article>
+            <p>
+              React DOM은 브라우저 DOM 환경에서 실행되는 웹 애플리케이션에서만
+              지원되는 기능을 포함하고 있습니다. 이 섹션은 다음과 같이 나뉩니다.
+            </p>
+            <ul>
+              <li>
+                <p>
+                  <span>컴포넌트와 Hook은 순수해야 합니다</span> - 순수성은
+                  코드를 더 쉽게 이해하고 디버그할 수 있도록 하며, React가
+                  올바르게 컴포넌트와 Hook을 자동으로 최적화할 수 있도록 합니다.
+                </p>
+              </li>
+              <li>
+                <p>
+                  <span>React가 컴포넌트와 Hook을 호출하는 방식</span> - React는
+                  사용자 경험을 최적화하기 위해 필요할 때마다 컴포넌트와 Hook을
+                  렌더링합니다.
+                </p>
+              </li>
+              <li>
+                <p>
+                  <span>Hook의 규칙</span> - Hook은 자바스크립트 함수로
+                  정의되지만 호출 위치에 제약이 있는 특별한 유형의 재사용 가능한
+                  UI 로직입니다.
+                </p>
+              </li>
+            </ul>
+          </article>
+          <h2 id="legacy-api">
+            레거시 API
+            <a title="Link for React의 규칙" href="#">
+              <i class="fa-solid fa-paperclip"></i>
+            </a>
+          </h2>
+          <article>
+            <ul>
+              <li>
+                <p>
+                  <span>레거시 API</span> - <code>react</code> 패키지에서
+                  내보냈지만<sup>Exported</sup> 새로 작성할 코드에서는 권장하지
+                  않습니다.
+                </p>
+              </li>
+            </ul>
+          </article>
+        </div>
+      </section>
+      <!-- Right Panel -->
+      <div class="panel-wrapper right">
+        <aside class="right-panel">
+          <div class="right-corner">
+            <p>이 페이지의 내용</p>
+            <nav>
+              <ul class="button-list">
+                <li>
+                  <input type="radio" id="btn-1" name="btn-group" checked />
+                  <label for="btn-1">
+                    <span>
+                      훑어보기
+                    </span>
+                  </label>
+                </li>
+                <li>
+                  <input type="radio" id="btn-2" name="btn-group" />
+                  <label for="btn-2">
+                    <span>
+                      React
+                    </span>
+                  </label>
+                </li>
+                <li>
+                  <input type="radio" id="btn-3" name="btn-group" />
+                  <label for="btn-3">
+                    <span>
+                      React DOM
+                    </span>
+                  </label>
+                </li>
+                <li>
+                  <input type="radio" id="btn-4" name="btn-group" />
+                  <label for="btn-4">
+                    <span>
+                      React의 규칙
+                    </span>
+                  </label>
+                </li>
+                <li>
+                  <input type="radio" id="btn-5" name="btn-group" />
+                  <label for="btn-5">
+                    <span>
+                      레거시 API
+                    </span>
+                  </label>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </aside>
+      </div>
+    </main>
   </body>
 </html>
