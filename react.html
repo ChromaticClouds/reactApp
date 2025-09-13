@@ -321,24 +321,12 @@
         background-color: var(--hover-color);
       }
 
+      /*
+        Main body
+      */
       main {
         display: grid;
         grid-template-columns: 340px 1fr 320px;
-      }
-
-      main section {
-        display: flex;
-        justify-content: center;
-        margin: 0 10px;
-      }
-
-      main .content {
-        margin-right: 20px;
-        max-width: var(--content-width);
-        width: 100%;
-        height: 100%;
-        padding: 10px 10px;
-        margin-bottom: 800px;
       }
 
       main .panel-wrapper {
@@ -360,6 +348,7 @@
         right: 0;
       }
 
+      /* Left panel */
       .left-panel nav {
         margin-top: 10px;
         margin-right: 20px;
@@ -422,6 +411,22 @@
         background-color: var(--border);
       }
 
+      /* Center panel */
+      main section {
+        display: flex;
+        justify-content: center;
+        margin: 0 10px;
+      }
+
+      main .content {
+        margin-right: 20px;
+        max-width: var(--content-width);
+        width: 100%;
+        height: 100%;
+        padding: 10px 10px;
+        margin-bottom: 800px;
+      }
+
       main .content article {
         width: 100%;
         display: flex;
@@ -477,6 +482,7 @@
         text-decoration: underline;
       }
 
+      /* Right panel */
       main .right-panel {
         padding: 10px 0;
         padding-left: 10px;
@@ -520,6 +526,7 @@
         cursor: pointer;
       }
 
+      /* Right panel button trigger */
       #btn-1:checked + label span {
         color: var(--on-surface-color);
         background-color: var(--light-hover-color);
@@ -1079,41 +1086,31 @@
                 <li>
                   <input type="radio" id="btn-1" name="btn-group" checked />
                   <label for="btn-1">
-                    <span>
-                      훑어보기
-                    </span>
+                    <span> 훑어보기 </span>
                   </label>
                 </li>
                 <li>
                   <input type="radio" id="btn-2" name="btn-group" />
                   <label for="btn-2">
-                    <span>
-                      React
-                    </span>
+                    <span> React </span>
                   </label>
                 </li>
                 <li>
                   <input type="radio" id="btn-3" name="btn-group" />
                   <label for="btn-3">
-                    <span>
-                      React DOM
-                    </span>
+                    <span> React DOM </span>
                   </label>
                 </li>
                 <li>
                   <input type="radio" id="btn-4" name="btn-group" />
                   <label for="btn-4">
-                    <span>
-                      React의 규칙
-                    </span>
+                    <span> React의 규칙 </span>
                   </label>
                 </li>
                 <li>
                   <input type="radio" id="btn-5" name="btn-group" />
                   <label for="btn-5">
-                    <span>
-                      레거시 API
-                    </span>
+                    <span> 레거시 API </span>
                   </label>
                 </li>
               </ul>
