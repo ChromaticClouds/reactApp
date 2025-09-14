@@ -33,6 +33,9 @@
         /* Content width */
         --width-content: 896px;
         --width-wide: 1280px;
+        
+        /* Content height */
+        --height-top-bar: 60px;
 
         /* 
          * COLOR
@@ -120,7 +123,7 @@
         position: sticky;
         top: 0;
         width: 100%;
-        height: 60px;
+        height: var(--height-top-bar);
         padding: 6px 20px;
         display: flex;
         align-items: center;
@@ -148,8 +151,8 @@
       /* Appear on mobile mode */
       .top-bar .hamburg-btn {
         display: none;
-        padding: 6px;
-        width: 52px;
+        padding: 8px;
+        width: calc(var(--height-top-bar) - 14px);
         height: 100%;
         justify-content: center;
         align-items: center;
@@ -300,14 +303,14 @@
       }
 
       .sub-list li button {
-        width: 46px;
-        height: 46px;
+        width: calc(var(--height-top-bar) - 14px);
+        height: calc(var(--height-top-bar) - 14px);
         border-radius: var(--radius-circle);
         cursor: pointer;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 1.6rem;
+        font-size: 1.4rem;
         font-family: var(--font-saira);
         font-weight: var(--weight-semiBold);
         background: transparent;
@@ -338,9 +341,9 @@
       main .left-panel,
       main .right-panel {
         position: fixed;
-        top: 60px;
+        top: var(--height-top-bar);
         width: 320px;
-        height: calc(100vh - 60px);
+        height: calc(100vh - var(--height-top-bar));
         overflow-y: auto;
         padding-bottom: 120px;
       }
